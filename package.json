@@ -1,0 +1,22 @@
+{
+  "name": "pushpin-labeler",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A Bluesky Labeler to help hide pushpin (bookmark) posts.",
+  "main": "index.js",
+  "scripts": {
+    "jetstream": "node --loader ts-node/esm jetstream.ts",
+    "start": "node --import=tsx labeler.ts"
+  },
+  "author": "Northwestern University Knight Lab",
+  "license": "ISC",
+  "devDependencies": {
+    "@skyware/jetstream": "^0.2.1",
+    "@skyware/labeler": "^0.2.0",
+    "@types/node": "^22.10.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "ws": "^8.18.0"
+  }
+}
