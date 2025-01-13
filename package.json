@@ -5,7 +5,6 @@
   "description": "A Bluesky Labeler to help hide pushpin (bookmark) posts.",
   "main": "index.js",
   "scripts": {
-    "jetstream": "node --loader ts-node/esm jetstream.ts",
     "start": "node --import=tsx labeler.ts"
   },
   "author": "Northwestern University Knight Lab",
