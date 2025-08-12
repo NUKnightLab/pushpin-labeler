@@ -20,19 +20,16 @@ getting started
 This project uses `nvm` to manage the node version. See `.nvmrc` for the definitive version, but currently set
 to `lts/iron`  If you have nvm installed, it should use that directly, at least for local development
 
-After checking out the repo:
-`npm install`
+After checking out the repo: 
+
+`npm install` 
 
 create a .env file that defines the following values. 
-By now, you should have set up a BlueSky account for which you have a DID and password (the password can be an app password)
-The signing key comes from setting up the labeler, using `npx @skyware/labeler setup`
-LABELER_DID
-LABELER_PASSWORD
-SIGNING_KEY
-DEBUG (optional, set to `true` to see log output)
+(By now, you should have set up a BlueSky account for which you have a DID and password (the password can be an app password)
+The signing key comes from setting up the labeler, using `npx @skyware/labeler setup`)
+* LABELER_DID
+* LABELER_PASSWORD
+* SIGNING_KEY
+* DEBUG (optional, set to `true` to see log output)
 
-`npm start`
-will start the labeler service, which listens to the BlueSky Jetstream and creates labels as appropriate. Labels are stored
-in a database. For local development, they are stored using SQLite in a database named `labels.db` (with some associated files). 
-For now, we'll use SQLite in production too, although eventually, we may want to switch to another database. While we are using
-SQLite, you should not deploy copies of the `labels.db*` files, or you would overwrite any labels created by the production service.
+`npm start` will start the labeler service, which listens to the BlueSky Jetstream and creates labels as appropriate. Labels are stored in a database. For local development, they are stored using SQLite in a database named `labels.db` (with some associated files).  For now, we'll use SQLite in production too, although eventually, we may want to switch to another database. While we are using SQLite, you should not deploy copies of the `labels.db*` files, or you would overwrite any labels created by the production service.

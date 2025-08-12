@@ -40,12 +40,8 @@ function atURIfromMessage(msg) {
     return at_uri
 }
 
-const jetstream = new Jetstream({
-    ws: WebSocket,
-	wantedCollections: ["app.bsky.feed.post"]
-});
 
-jetstream.onCreate("app.bsky.feed.post", (event) => {
+function onCreate(event) {
     try {
         if (event.commit.record.reply) {
             let text = event.commit.record.text.trim()
@@ -77,8 +73,39 @@ jetstream.onCreate("app.bsky.feed.post", (event) => {
             }
         }
     } catch (error) {
+        console.error(error)
         debug(error)        
     }
-});
+}
 
-jetstream.start()
+function onError(error, cursor) {
+    console.error('Jetstream error:', error);
+    if (cursor) {
+        console.error('Last known cursor:', cursor);
+    }
+    
+    // Wait a bit before attempting to reconnect
+    // this only tries once... and is it possible that the 
+    // jetstream is still running?
+    setTimeout(() => {
+        console.log('Attempting to reconnect...');
+        listenToJetstream(cursor)
+    })
+}
+
+function listenToJetstream(cursor) {
+    const jetstream = new Jetstream({
+        ws: WebSocket,
+        wantedCollections: ["app.bsky.feed.post"],
+        cursor
+    });
+
+    jetstream.onCreate("app.bsky.feed.post", onCreate);
+
+    jetstream.on("error", onError)
+
+    jetstream.start()
+
+}
+
+listenToJetstream(null)
